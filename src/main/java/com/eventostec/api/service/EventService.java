@@ -3,6 +3,7 @@ package com.eventostec.api.service;
 import com.amazonaws.services.s3.AmazonS3;
 import com.eventostec.api.domain.event.Event;
 import com.eventostec.api.domain.event.EventRequestDTO;
+import com.eventostec.api.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,12 @@ public class EventService {
     @Autowired
     private AmazonS3 s3Client;
 
+    @Autowired
+    private EventRepository repository;
+
     public Event createEvent(EventRequestDTO data) {
 
-        String imgUrl = null;
+        String imgUrl = "";
 
         if (data.image() != null) {
             imgUrl = this.uploadImg(data.image());
@@ -37,13 +41,16 @@ public class EventService {
         newEvent.setDescription(data.description());
         newEvent.setEventUrl(data.eventUrl());
         newEvent.setDate(new Date(data.date()));
-        newEvent.setImgUrl(data.eventUrl());
+        newEvent.setImgUrl(imgUrl);
+        newEvent.setRemote(data.remote());
+
+        repository.save(newEvent);
 
         return newEvent;
     }
 
     private String uploadImg(MultipartFile multipartFile) {
-        String fileName = UUID.randomUUID() + "- " + multipartFile.getOriginalFilename();
+        String fileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
 
         try{
             File file = this.convertMultipartToFile(multipartFile);
@@ -52,7 +59,8 @@ public class EventService {
             return s3Client.getUrl(bucketName, fileName).toString();
         } catch (Exception e) {
             System.out.println("Erro ao subir arquivo!");
-            return null;
+            e.printStackTrace();
+            return "";
         }
     }
 
