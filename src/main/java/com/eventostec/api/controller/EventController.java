@@ -33,10 +33,11 @@ public class EventController {
         return ResponseEntity.ok(newEvent);
     }
 
+    @GetMapping
     public ResponseEntity<List<EventResponseDTO>> getEvents(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = ")") int size) {
-        List<EventResponseDTO> allEvents = this.eventService.getEvents(page, size);
+        List<EventResponseDTO> allEvents = this.eventService.getUpcomingEvents(page, size);
         return ResponseEntity.ok(allEvents);
     }
 
