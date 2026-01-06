@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -22,7 +23,7 @@ public class CouponService {
 
     public Coupon addCouponToEvent(UUID eventId, CouponRequestDTO couponData) {
         Event event = eventRepository.findById(eventId)
-                .orElseThrow(() -> new IllegalArgumentException("Event not found!"));
+                .orElseThrow(() -> new IllegalArgumentException("EventDetailsDTO.java not found!"));
 
         Coupon coupon = new Coupon();
         coupon.setCode(couponData.code());
@@ -31,5 +32,9 @@ public class CouponService {
         coupon.setEvent(event);
 
         return couponRepository.save(coupon);
+    }
+
+    public List<Coupon> consultCoupons(UUID eventId, Date currentDate) {
+        return couponRepository.findByEventIdAndValidAfter(eventId, currentDate);
     }
 }
