@@ -12,10 +12,10 @@ import java.util.UUID;
 
 public interface EventRepository extends JpaRepository
         <Event, UUID> {
-    @Query("SELECT e FROM EventDetailsDTO.java e LEFT JOIN FETCH e.address a WHERE e.date >= :currentDate")
+    @Query("SELECT e FROM Event e LEFT JOIN FETCH e.address a WHERE e.date >= :currentDate")
     public Page<Event> findUpcomingEvent(@Param("currentDate") Date currentDate, Pageable pageable);
 
-    @Query("SELECT e FROM EventDetailsDTO.java e LEFT JOIN e.address a " +
+    @Query("SELECT e FROM Event e LEFT JOIN e.address a " +
             "WHERE (:title = '' OR e.title LIKE %:title%) " +
             "AND (:city = '' OR a.city LIKE %:city%) " +
             "AND (:uf = '' OR a.uf LIKE %:uf%) " +

@@ -61,7 +61,7 @@ public class EventController {
     }
 
     @GetMapping("/{eventId}")
-    public Response<List<EventRequestDTO>> getEventDetails(@PathVariable UUID eventId) {
+    public ResponseEntity<EventDetailsDTO> getEventDetails(@PathVariable UUID eventId) {
         EventDetailsDTO eventDetails = eventService.getEventDetails(eventId);
         return ResponseEntity.ok(eventDetails);
     }

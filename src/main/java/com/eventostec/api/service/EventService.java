@@ -132,7 +132,7 @@ public class EventService {
 
     public EventDetailsDTO getEventDetails(UUID eventId) {
         Event event = repository.findById(eventId)
-                .orElseThrow(() -> new IllegalArgumentException("EventDetailsDTO.java not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Event not found"));
 
         List<Coupon> coupons = couponService.consultCoupons(eventId, new Date());
 
