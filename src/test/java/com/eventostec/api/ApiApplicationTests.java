@@ -11,3 +11,5 @@ class ApiApplicationTests {
 	@Test
 	void contextLoads() {
 		//Test the context
+	}
+}
