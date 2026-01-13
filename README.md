@@ -4,7 +4,7 @@
 
 API REST desenvolvida em **Java com Spring Boot**, aplicando boas práticas de back-end, modelagem de dados e deploy em cloud.
 
-Projeto inspirado no backend do projeto open source **eventostec.com.br**, apresentado pela Loiane Groner.
+Projeto inspirado no backend do projeto open source **eventostec.com.br**.
 
 ---
 
