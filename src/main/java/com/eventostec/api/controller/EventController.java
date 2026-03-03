@@ -6,6 +6,8 @@ import com.eventostec.api.domain.event.EventDetailsDTO;
 import com.eventostec.api.domain.event.EventRequestDTO;
 import com.eventostec.api.domain.event.EventResponseDTO;
 import com.eventostec.api.service.EventService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Events", description = "Operations related to events")
 @RestController()
 @RequestMapping("/api/event")
 public class EventController {
@@ -24,6 +27,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @Operation(summary = "Create a new event")
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<Event> create(
             @RequestParam("title") String title,
@@ -39,6 +43,7 @@ public class EventController {
         return ResponseEntity.ok(newEvent);
     }
 
+    @Operation(summary = "Get all events")
     @GetMapping
     public ResponseEntity<List<EventResponseDTO>> getEvents(
             @RequestParam(defaultValue = "0") int page,
@@ -47,6 +52,7 @@ public class EventController {
         return ResponseEntity.ok(allEvents);
     }
 
+    @Operation(summary = "Get filtered events")
     @GetMapping("/filter")
     public ResponseEntity<List<EventResponseDTO>> filterList (@RequestParam(defaultValue = "0") int page,
                                                               @RequestParam(defaultValue = "10") int size,
@@ -60,6 +66,7 @@ public class EventController {
         return ResponseEntity.ok(events);
     }
 
+    @Operation(summary = "Get event by ID")
     @GetMapping("/{eventId}")
     public ResponseEntity<EventDetailsDTO> getEventDetails(@PathVariable UUID eventId) {
         EventDetailsDTO eventDetails = eventService.getEventDetails(eventId);
