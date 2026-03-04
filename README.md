@@ -4,8 +4,6 @@
 
 API REST desenvolvida em **Java com Spring Boot**, aplicando boas práticas de back-end, modelagem de dados e deploy em cloud.
 
-Projeto inspirado no backend do projeto open source **eventostec.com.br**.
-
 ---
 
 ## 🛠 Tecnologias
@@ -59,8 +57,6 @@ Projeto desenvolvido com foco em **aprendizado prático de back-end e cloud**, c
 # Events REST API (Spring Boot + AWS)
 
 REST API developed in **Java with Spring Boot**, applying backend best practices, data modeling and cloud deployment.
-
-Project inspired by the open source backend **eventostec.com.br**, presented by Loiane Groner.
 
 ---
 
