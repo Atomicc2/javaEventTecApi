@@ -45,6 +45,7 @@ API REST desenvolvida em **Java com Spring Boot**, aplicando boas práticas de b
 - Modelagem de dados  
 - Integração com serviços da AWS  
 - Deploy e configuração de infraestrutura  
+- Uso de swagger para documentação
 
 ---
 
